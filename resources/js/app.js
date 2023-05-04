@@ -6,6 +6,7 @@ let id = 1;
 function addTask() {
     // Remove "No Items" text
     if (id == 1) {
+        console.dir(taskList)
         taskList.children[0].remove();
     }
 
@@ -17,11 +18,10 @@ function addTask() {
     newTask.appendChild(div);
     div.innerHTML = `
     <div class="hstack mt-2 mb-2 ms-4 me-4">
-        <div class="input-group me-4">
-            <span class="input-group-text" id="taskIndex${id}">${id}</span>
+        <div class="inline-flex align-items-center">
+            <span class="font-monospace" id="taskIndex${id}">${id}- </span>
             <input type="text" id="task${id}" class="form-control" placeholder="Task name" aria-label="Task name">
         </div>
-        <input class="form-check-input" type="checkbox" id="c${id}">
     </div>`;
     newTask.appendChild(document.createElement('hr'));
 
