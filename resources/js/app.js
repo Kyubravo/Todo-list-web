@@ -2,10 +2,10 @@ addTaskBtn = document.getElementById("addTaskBtn");
 taskList = document.getElementById("taskList");
 addTaskBtn.addEventListener("click", addTask);
 
-let id = 0;
+let id = 1;
 function addTask() {
     // Remove "No Items" text
-    if (id == 0) {
+    if (id == 1) {
         taskList.children[0].remove();
     }
 
