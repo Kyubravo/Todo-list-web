@@ -33,5 +33,5 @@ function addTask(taskName) {
 function addTaskBtnPress() {
     addTask(newTaskName.value)
     
-    newTaskTextBox.value = ""
+    newTaskName.value = ""
 }
