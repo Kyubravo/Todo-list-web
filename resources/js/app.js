@@ -1,9 +1,9 @@
 addTaskBtn = document.getElementById("addTaskBtn");
 taskList = document.getElementById("taskList");
-addTaskBtn.addEventListener("click", addTask);
+addTaskBtn.addEventListener("click", addTaskBtnPress);
 
 let id = 1;
-function addTask() {
+function addTask(taskName) {
     // Remove "No Items" text
     if (id == 1) {
         taskList.children[0].remove();
@@ -16,39 +16,28 @@ function addTask() {
     let div = document.createElement('div');
     newTask.appendChild(div);
     div.innerHTML = `
-    <div class="hstack mt-2 mb-2 ms-4 me-4">
-        <div class="inline-flex align-items-center">
+    <div class="hstack mb-2 mt-2 ms-4 me-4 justify-content-between">
+        <div>
             <span class="font-monospace" id="taskIndex${id}">${id}- </span>
-            <input type="text" id="task${id}" class="form-control" placeholder="Task name" aria-label="Task name">
+            <label class="form-check-label" for="c${id}" id="taskName${id}">${taskName}</label>
         </div>
+        <input class="form-check-input" type="checkbox" id="c${id}">
     </div>`;
     newTask.appendChild(document.createElement('hr'));
 
     // Subscribe the inputfield "Task name" event listener
-    let inputField = document.getElementById(`task${id}`);
-    inputField.addEventListener("focusout", e => {setTask(e, id);});
+    //let inputField = document.getElementById(`task${id}`);
+    //inputField.addEventListener("focusout", e => {setTask(e, id);});
 
 
     // Increment the id
     id++;
 }
 
-function setTask(event, index) {
-    if (event.target.value == "")
-        return;
-        
-    // Get the <li> element
-    listElement = event.target.parentElement.parentElement.parentElement;
+function addTaskBtnPress() {
+    newTaskTextBox = document.getElementById("newTaskName");
 
-    listElement.innerHTML = `
-    <li>
-        <div class="hstack mb-2 ms-4 me-4 justify-content-between">
-            <div>
-                <span class="font-monospace" id="taskIndex${index}">${index}- </span>
-                <label class="form-check-label" for="c${index}" id="taskName${index}">${event.target.value}</label>
-            </div>
-            <input class="form-check-input" type="checkbox" id="c${index}">
-        </div>
-    </li>`;
+    addTask(newTaskTextBox.value)
     
+    newTaskTextBox.value = ""
 }
