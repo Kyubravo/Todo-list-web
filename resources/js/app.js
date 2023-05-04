@@ -1,6 +1,6 @@
-addTaskBtn = document.getElementById("addTaskBtn");
+newTaskBtn = document.getElementById("newTaskBtn");
 taskList = document.getElementById("taskList");
-addTaskBtn.addEventListener("click", addTaskBtnPress);
+newTaskBtn.addEventListener("click", addTaskBtnPress);
 
 let id = 1;
 function addTask(taskName) {
@@ -24,11 +24,6 @@ function addTask(taskName) {
         <input class="form-check-input" type="checkbox" id="c${id}">
     </div>`;
     newTask.appendChild(document.createElement('hr'));
-
-    // Subscribe the inputfield "Task name" event listener
-    //let inputField = document.getElementById(`task${id}`);
-    //inputField.addEventListener("focusout", e => {setTask(e, id);});
-
 
     // Increment the id
     id++;
