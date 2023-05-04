@@ -1,4 +1,5 @@
 newTaskBtn = document.getElementById("newTaskBtn");
+newTaskName = document.getElementById("newTaskName");
 taskList = document.getElementById("taskList");
 newTaskBtn.addEventListener("click", addTaskBtnPress);
 
@@ -30,9 +31,7 @@ function addTask(taskName) {
 }
 
 function addTaskBtnPress() {
-    newTaskTextBox = document.getElementById("newTaskName");
-
-    addTask(newTaskTextBox.value)
+    addTask(newTaskName.value)
     
     newTaskTextBox.value = ""
 }
