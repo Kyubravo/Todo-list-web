@@ -1,7 +1,9 @@
 newTaskBtn = document.getElementById("newTaskBtn");
 newTaskName = document.getElementById("newTaskName");
 taskList = document.getElementById("taskList");
+
 newTaskBtn.addEventListener("click", addTaskBtnPress);
+newTaskName.addEventListener("keydown", addTaskBtnPress)
 
 let id = 1;
 function addTask(taskName) {
@@ -30,8 +32,24 @@ function addTask(taskName) {
     id++;
 }
 
-function addTaskBtnPress() {
-    addTask(newTaskName.value)
+function addTaskBtnPress(e) {
+    switch (e.type){
+        case "keydown":
+            console.log(e);
+            // Pressed Enter
+            if (e.keyCode === 13 && newTaskName.value !== ""){
+                addTask(newTaskName.value);
+                newTaskName.value = ""
+            }
+            break;
+
+        // Pressed the button
+        case "click":
+            addTask(newTaskName.value);
+            newTaskName.value = ""
+            break;
+            
+        default:
+    }
     
-    newTaskName.value = ""
 }
