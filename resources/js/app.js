@@ -46,7 +46,7 @@ function updateUnfinishedTaskList() {
         // Create List Item
         let newTask = document.createElement('li');
         newTask.innerHTML = getEmptyTaskHTML();
-        finishedTaskList.appendChild(newTask);
+        unfinishedTaskList.appendChild(newTask);
     } else {
         for (let i = 0; i < unfinishedTasks.length; i++) { // if contains tasks
             // Create List Item
