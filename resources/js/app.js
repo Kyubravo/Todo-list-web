@@ -29,8 +29,8 @@ function getTaskHTML(i, task){
     <div>
         <div class="hstack mb-2 mt-2 ms-4 me-4 justify-content-between">
             <div>
-            <label class="form-check-label" for="c${i}" id="${tick ? "f" : "u"}TaskName${i}">${task.taskName}</label>
             <span class="font-monospace">${i}- </span>
+            <label class="form-check-label" for="c${i}" id="${tick ? "f" : "u"}TaskName${i}">${task.taskName}</label>
             </div>
             <input class="form-check-input" type="checkbox" id="${tick ? "f" : "u"}c${i}" ${tick ? "checked" : ""}>
         </div>
