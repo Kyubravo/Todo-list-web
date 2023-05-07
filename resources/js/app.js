@@ -1,6 +1,7 @@
 const newTaskBtn = document.getElementById("newTaskBtn");
 const newTaskName = document.getElementById("newTaskName");
-const taskList = document.getElementById("taskList");
+const unfinishedTaskList = document.getElementById("taskList");
+const finishedTaskList = document.getElementById("finishedTaskList");
 
 newTaskBtn.addEventListener("click", addTaskBtnPress);
 newTaskName.addEventListener("keydown", addTaskBtnPress);
@@ -12,7 +13,8 @@ class Task {
     }
 }
 
-const taskArr = [];
+const unfinishedTasks = [];
+const finishedTasks = [];
 
 function getEmptyTaskHTML(){
     return ` 
@@ -21,35 +23,37 @@ function getEmptyTaskHTML(){
 }
 
 function getTaskHTML(i, task){
+    i++;
+    let tick = task.completed === true;
     return `
     <div>
         <div class="hstack mb-2 mt-2 ms-4 me-4 justify-content-between">
             <div>
-                <span class="font-monospace" id="taskIndex${i+1}">${i+1}- </span>
-                <label class="form-check-label" for="c${i+1}" id="taskName${i+1}">${task.taskName}</label>
+            <label class="form-check-label" for="c${i}" id="${tick ? "f" : "u"}TaskName${i}">${task.taskName}</label>
+            <span class="font-monospace">${i}- </span>
             </div>
-            <input class="form-check-input" type="checkbox" id="c${i+1}" ${task.completed === true ? "checked" : ""}>
+            <input class="form-check-input" type="checkbox" id="${tick ? "f" : "u"}c${i}" ${tick ? "checked" : ""}>
         </div>
     </div>`
 }
 
-function updateTaskList() {
+function updateUnfinishedTaskList() {
     // Remove all <li>
-    taskList.innerHTML = "";
+    unfinishedTaskList.innerHTML = "";
 
     // Add all the children that are in taskArr
-    if (taskArr.length === 0) { // if empty, display "No Items"
+    if (unfinishedTasks.length === 0) { // if empty, display "No Items"
         // Create List Item
         let newTask = document.createElement('li');
         newTask.innerHTML = getEmptyTaskHTML();
-        taskList.appendChild(newTask);
+        finishedTaskList.appendChild(newTask);
     } else {
-        for (let i = 0; i < taskArr.length; i++) { // if contains tasks
+        for (let i = 0; i < unfinishedTasks.length; i++) { // if contains tasks
             // Create List Item
             let newTask = document.createElement('li');
-            taskList.appendChild(newTask);
+            unfinishedTaskList.appendChild(newTask);
             
-            newTask.innerHTML = getTaskHTML(i, taskArr[i]);
+            newTask.innerHTML = getTaskHTML(i, unfinishedTasks[i]);
             
             // Create Separator
             newTask.appendChild(document.createElement('hr'));
@@ -57,9 +61,28 @@ function updateTaskList() {
         }
     }
 }
+
+function updatefinishedTaskList() {
+    // Remove all <li>
+    finishedTaskList.innerHTML = "";
+
+    for (let i = 0; i < finishedTasks.length; i++) { // if contains tasks
+        // Create List Item
+        let newTask = document.createElement('li');
+        finishedTaskList.appendChild(newTask);
+        
+        newTask.innerHTML = getTaskHTML(i, finishedTasks[i]);
+        
+        // Create Separator
+        newTask.appendChild(document.createElement('hr'));
+
+    }
+    
+}
+
 function addTask(taskName) {
-    taskArr.push(new Task(taskName, false))
-    updateTaskList();
+    unfinishedTasks.push(new Task(taskName, false))
+    updateUnfinishedTaskList();
 }
 
 function addTaskBtnPress(e) {
