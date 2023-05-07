@@ -16,6 +16,30 @@ class Task {
 const unfinishedTasks = [];
 const finishedTasks = [];
 
+function tickChange(id) {
+    // Regular expression on the Checkbox's id
+    const re = new RegExp(/(u|f)c(\d+)/);
+    regexResult = id.match(re);
+    regexResult[1]; // (u|f)
+    regexResult[2]; // (\d+)
+
+    isFinished = regexResult[1] === "f" ? true : false;
+    index = parseInt(regexResult[2]) - 1;
+
+    // Change Task's position and completion status
+    if(isFinished){
+        finishedTasks[index].completed = false;
+        unfinishedTasks.push(finishedTasks.splice(index,1)[0]);
+    } else {
+        unfinishedTasks[index].completed = true;
+        finishedTasks.push(unfinishedTasks.splice(index,1)[0]);
+    }
+
+
+    updateTaskList();
+
+}
+
 function getEmptyTaskHTML(){
     return ` 
     <h3 class="h3 text-center">No Items</h3>
@@ -32,9 +56,14 @@ function getTaskHTML(i, task){
             <span class="font-monospace">${i}- </span>
             <label class="form-check-label" for="c${i}" id="${tick ? "f" : "u"}TaskName${i}">${task.taskName}</label>
             </div>
-            <input class="form-check-input" type="checkbox" id="${tick ? "f" : "u"}c${i}" ${tick ? "checked" : ""}>
+            <input class="form-check-input" type="checkbox" id="${tick ? "f" : "u"}c${i}" ${tick ? "checked" : ""} onchange="tickChange(this.id);">
         </div>
     </div>`
+}
+
+function updateTaskList() {
+    updateUnfinishedTaskList();
+    updatefinishedTaskList();
 }
 
 function updateUnfinishedTaskList() {
@@ -66,7 +95,7 @@ function updatefinishedTaskList() {
     // Remove all <li>
     finishedTaskList.innerHTML = "";
 
-    for (let i = 0; i < finishedTasks.length; i++) { // if contains tasks
+    for (let i = 0; i < finishedTasks.length; i++) { // if contains finished tasks
         // Create List Item
         let newTask = document.createElement('li');
         finishedTaskList.appendChild(newTask);
