@@ -3,7 +3,7 @@ const newTaskName = document.getElementById("newTaskName");
 const taskList = document.getElementById("taskList");
 
 newTaskBtn.addEventListener("click", addTaskBtnPress);
-newTaskName.addEventListener("keydown", addTaskBtnPress)
+newTaskName.addEventListener("keydown", addTaskBtnPress);
 
 class Task {
     constructor(taskName, completed) {
@@ -12,35 +12,46 @@ class Task {
     }
 }
 
-let id = 1;
 const taskArr = [];
+
+function getEmptyTaskHTML(){
+    return ` 
+    <h3 class="h3 text-center">No Items</h3>
+    `
+}
+
+function getTaskHTML(i, task){
+    return `
+    <div>
+        <div class="hstack mb-2 mt-2 ms-4 me-4 justify-content-between">
+            <div>
+                <span class="font-monospace" id="taskIndex${i+1}">${i+1}- </span>
+                <label class="form-check-label" for="c${i+1}" id="taskName${i+1}">${task.taskName}</label>
+            </div>
+            <input class="form-check-input" type="checkbox" id="c${i+1}" ${task.completed === true ? "checked" : ""}>
+        </div>
+    </div>`
+}
+
 function updateTaskList() {
     // Remove all <li>
     taskList.innerHTML = "";
-
 
     // Add all the children that are in taskArr
     if (taskArr.length === 0) { // if empty, display "No Items"
         // Create List Item
         let newTask = document.createElement('li');
-        newTask.innerHTML = `<h3 class="h3 text-center">No Items</h3>`
+        newTask.innerHTML = getEmptyTaskHTML();
         taskList.appendChild(newTask);
     } else {
         for (let i = 0; i < taskArr.length; i++) { // if contains tasks
             // Create List Item
             let newTask = document.createElement('li');
             taskList.appendChild(newTask);
-
-            let div = document.createElement('div');
-            newTask.appendChild(div);
-            div.innerHTML = `
-            <div class="hstack mb-2 mt-2 ms-4 me-4 justify-content-between">
-                <div>
-                    <span class="font-monospace" id="taskIndex${i+1}">${i+1}- </span>
-                    <label class="form-check-label" for="c${i+1}" id="taskName${i+1}">${taskArr[i].taskName}</label>
-                </div>
-                <input class="form-check-input" type="checkbox" id="c${i+1}" ${taskArr[i].completed === true ? "checked" : ""}>
-            </div>`;
+            
+            newTask.innerHTML = getTaskHTML(i, taskArr[i]);
+            
+            // Create Separator
             newTask.appendChild(document.createElement('hr'));
 
         }
