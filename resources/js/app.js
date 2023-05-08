@@ -20,6 +20,8 @@ function tickChange(id) {
     // Regular expression on the Checkbox's id
     const re = new RegExp(/(u|f)c(\d+)/);
     regexResult = id.match(re);
+    regexResult[1]; // (u|f)
+    regexResult[2]; // (\d+)
 
     isFinished = regexResult[1] === "f" ? true : false;
     index = parseInt(regexResult[2]) - 1;
@@ -47,15 +49,14 @@ function getEmptyTaskHTML(){
 function getTaskHTML(i, task){
     i++;
     let tick = task.completed === true;
-    let fOrU = tick ? "f" : "u";
     return `
     <div>
         <div class="hstack mb-2 mt-2 ms-4 me-4 justify-content-between">
             <div>
             <span class="font-monospace">${i}- </span>
-            <label class="form-check-label" for="c${i}" id="${fOrU}TaskName${i}">${task.taskName}</label>
+            <label class="form-check-label" for="c${i}" id="${tick ? "f" : "u"}TaskName${i}">${task.taskName}</label>
             </div>
-            <input class="form-check-input" type="checkbox" id="${fOrU}c${i}" ${tick ? "checked" : ""} onchange="tickChange(this.id);">
+            <input class="form-check-input" type="checkbox" id="${tick ? "f" : "u"}c${i}" ${tick ? "checked" : ""} onchange="tickChange(this.id);">
         </div>
     </div>`
 }
@@ -108,10 +109,12 @@ function updatefinishedTaskList() {
     
 }
 
+
 function addTask(taskName) {
     unfinishedTasks.push(new Task(taskName, false))
     updateUnfinishedTaskList();
 }
+
 
 function addTaskBtnPress(e) {
     switch (e.type){
@@ -125,7 +128,7 @@ function addTaskBtnPress(e) {
 
         // Pressed the button
         case "click":
-            addTask(newTaskName.value && newTaskName.value !== "");
+            addTask(newTaskName.value);
             newTaskName.value = ""
             break;
             
