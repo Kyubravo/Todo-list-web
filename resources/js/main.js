@@ -11,7 +11,7 @@ newTaskName.addEventListener("keydown", addTaskBtnPress);
 function addTaskBtnPress(e) {
     if (e.keyCode === 13){
         update_task_list();
-        newTaskName.value = ""
+        newTaskName.value = "";
     }
 }
 
@@ -19,7 +19,7 @@ function addTaskBtnPress(e) {
 function update_task_list() {
     if (newTaskName.value !== "") {
         addTask(newTaskName.value);
-        newTaskName.value = ""
+        
     }
 }
 
@@ -35,12 +35,12 @@ class Task {
 
 function addTask() {
     const id = tasks_list.length + 1;
-    tasks_list.push(new Task(id, newTaskName.value, false))
+    tasks_list.push(new Task(id, newTaskName.value, false));
     updateTaskList();
 }
 
 
-function get_task_body(task, i, is_checked) {
+function get_task_body(task, i) {
     return `
     <div>
         <div class="hstack mb-2 mt-2 ms-4 me-4 justify-content-between">
@@ -57,11 +57,14 @@ function get_task_body(task, i, is_checked) {
 
 
 function tickChange(id) {
-    task_index = tasks_list.findIndex(task => task.id === id)
-    updated_task = tasks_list[task_index]
-    updated_task.is_completed = !updated_task.is_completed
-    tasks_list[task_index] = updated_task
-    updateTaskList()
+    task_index = tasks_list.findIndex(task => task.id === id);
+
+    // Switch the state of is_completed
+    updated_task = tasks_list[task_index];
+    updated_task.is_completed = !updated_task.is_completed;
+    tasks_list[task_index] = updated_task;
+
+    updateTaskList();
 }
 
 
