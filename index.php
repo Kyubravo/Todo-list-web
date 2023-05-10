@@ -1,5 +1,5 @@
 <?php
-require_once "partials/head.php";
+require "partials/head.php";
 ?>
 
 
@@ -35,5 +35,6 @@ require_once "partials/head.php";
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="./resources/js/main.js"></script>
 
-</body>
-</html>
+<?php
+require "partials/foot.php";
+?>
