@@ -4,8 +4,8 @@ const unfinishedTaskList = document.getElementById("taskList");
 const finishedTaskList = document.getElementById("finishedTaskList");
 const tasks_list = [];
 
-newTaskBtn.addEventListener("click", update_task_list);
-newTaskName.addEventListener("keydown", addTaskBtnPress);
+//newTaskBtn.addEventListener("click", update_task_list);
+//newTaskName.addEventListener("keydown", addTaskBtnPress);
 
 
 function addTaskBtnPress(e) {
