@@ -14,7 +14,7 @@ require "partials/head.php";
                     <?php 
                     $taskListId = "taskList";
                     require("partials/task-list.php"); 
-                    require "partials/button.php";
+                    require("partials/form.php");
                     ?>
                 </div>
             </div>
