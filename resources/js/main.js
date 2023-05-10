@@ -71,10 +71,13 @@ function tickChange(id) {
 function updateTaskList() {
     unfinishedTaskList.innerHTML = tasks_list
         .filter(task => task.is_completed === false)
-        .map((task, i) => get_task_body(task, i));
+        .map((task, i) => get_task_body(task, i))
+        .join("<hr>");
+        
     finishedTaskList.innerHTML = tasks_list
         .filter(task => task.is_completed === true)
-        .map((task, i) => get_task_body(task, i));
+        .map((task, i) => get_task_body(task, i))
+        .join("<hr>");
 }
 
 
