@@ -7,10 +7,10 @@
             <div class="vstack m-3">
                 <?php 
                 $taskListId = "taskList";
+                $taskListType = 0;
                 require("partials/task-list.php"); 
 
                 require("partials/form.php");
-                require("functions/addTask.php");
                 ?>
             </div>
         </div>
@@ -21,6 +21,7 @@
             <div class="vstack m-3">
                 <?php 
                 $taskListId = "finishedTaskList";
+                $taskListType = 1;
                 require("partials/task-list.php");
                 ?>
             </div>
