@@ -8,7 +8,7 @@
                 </label>
             </div>
             <form action="" method="post" id=<?= $taskId ?>>
-                <input class="form-check-input" type="checkbox" name="checkbox" value="<?= $taskId ?>" onchange="tickChange(<?= $taskId ?>);" <?= $is_complete === 1 ? "checked" : ""; ?>>
+                <input class="form-check-input" type="checkbox" name="checkbox" value="<?= $taskId ?>" onchange="tickChange(this, <?= $taskId ?>);" <?= $is_complete === 1 ? "checked" : ""; ?>>
             </form>
         </div>
     </div>
