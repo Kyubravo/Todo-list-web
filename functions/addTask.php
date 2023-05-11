@@ -2,7 +2,6 @@
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     
-    echo "-----" . $_POST["taskName"];
     $query = "INSERT INTO items (title, is_complete) VALUES (? , 0)";
 
     $stmt = $conn->prepare($query);
