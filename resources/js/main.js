@@ -6,7 +6,7 @@ const finishedTaskList = document.getElementById("finishedTaskList");
 function tickChange(checkbox, id) {
     const form = document.getElementById(id);
     checkbox.checked = true
-    checkbox.value = checkbox.value == -1 ? 0 : checkbox.value;
+    checkbox.value = checkbox.value == -1 ? -1 : checkbox.value;
     form.submit();
     
 }
