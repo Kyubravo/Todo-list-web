@@ -10,7 +10,11 @@
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     require("Database.php");
     echo "-----" . $_POST["taskName"];
-    $query = "INSERT INTO items (title, is_complete) VALUES ('{$_POST["taskName"]}' , 0)";
-    
-    $conn->query($query);
+    $query = "INSERT INTO items (title, is_complete) VALUES (? , 0)";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $_POST["taskName"]);
+
+    $stmt->execute();
+
 }
