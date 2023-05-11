@@ -8,7 +8,9 @@
                 <?php 
                 $taskListId = "taskList";
                 require("partials/task-list.php"); 
+
                 require("partials/form.php");
+                require("functions/addTask.php");
                 ?>
             </div>
         </div>
