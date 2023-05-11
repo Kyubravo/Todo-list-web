@@ -1,5 +1,4 @@
 <?php
-var_dump($_POST);
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["checkbox"])){
 
     $var = $_POST["checkbox"] == -1 ? 0 : (int) $_POST["checkbox"];
